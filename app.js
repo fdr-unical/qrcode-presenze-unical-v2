@@ -1,8 +1,7 @@
 // Configurazione predefinita
-const DEFAULT_PERIOD = 60; // Secondi
-const DEFAULT_TOLERANCE = 1; // ±N periodi
+const DEFAULT_PERIOD = 60;
+const DEFAULT_TOLERANCE = 1;
 
-// Variabili globali
 let currentPeriod = DEFAULT_PERIOD;
 let currentTolerance = DEFAULT_TOLERANCE;
 let qrCodeInstance = null;
@@ -17,7 +16,6 @@ const statusElement = document.getElementById('status');
 const exportBtn = document.getElementById('exportBtn');
 const logContainer = document.getElementById('logContainer');
 
-// Funzioni di utilità
 function generateTimestamp() {
     return new Date().toISOString();
 }
@@ -33,7 +31,6 @@ function logEvent(type, message) {
     logEntries.unshift(entry);
     updateLogDisplay();
     
-    // Mantieni solo le ultime 100 voci
     if (logEntries.length > 100) {
         logEntries.pop();
     }
@@ -61,15 +58,13 @@ function generateQRCode() {
         return;
     }
     
-    // Genera il QR code con timestamp
+    // Genera QR code con dati
     const timestamp = generateTimestamp();
     const qrData = `${formUrl}?timestamp=${timestamp}&period=${period}&tolerance=${tolerance}`;
     
-    // Pulisci il container
     qrcodeDiv.innerHTML = '';
     
     try {
-        // Crea nuovo QR Code
         qrCodeInstance = new QRCode(qrcodeDiv, {
             text: qrData,
             width: 200,
@@ -114,7 +109,5 @@ exportBtn.addEventListener('click', exportLog);
 // Inizializzazione
 document.addEventListener('DOMContentLoaded', () => {
     logEvent('info', 'Sistema avviato');
-    
-    // Genera QR Code iniziale
     generateQRCode();
 });
