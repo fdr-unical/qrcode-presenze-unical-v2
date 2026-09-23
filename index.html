@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Presenze UniCal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Presenze UniCal</h1>
+            <p>Scansiona il QR Code per registrare la presenza</p>
+        </header>
+
+        <main>
+            <div class="config-section">
+                <label for="formUrl">URL Form Microsoft:</label>
+                <input type="url" id="formUrl" placeholder="https://forms.office.com/..." value="https://forms.office.com/">
+                
+                <label for="period">Durata QR (secondi):</label>
+                <input type="number" id="period" value="60" min="30" max="180" step="15">
+                
+                <label for="tolerance">Tolleranza (±N periodi):</label>
+                <input type="number" id="tolerance" value="1" min="0" max="5">
+            </div>
+
+            <div class="qr-section">
+                <div id="qrcode"></div>
+                <p id="status">Genera il QR Code per iniziare</p>
+            </div>
+
+            <div class="log-section">
+                <h2>Log Scansioni</h2>
+                <button id="exportBtn">Esporta Log</button>
+                <div id="logContainer"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Università della Calabria &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
