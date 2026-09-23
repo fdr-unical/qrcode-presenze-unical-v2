@@ -1,4 +1,4 @@
-  // Configurazione predefinita
+// Configurazione predefinita
 const DEFAULT_PERIOD = 60; // Secondi
 const DEFAULT_TOLERANCE = 1; // ±N periodi
 
@@ -68,20 +68,26 @@ function generateQRCode() {
     // Pulisci il container
     qrcodeDiv.innerHTML = '';
     
-    // Crea nuovo QR Code
-    qrCodeInstance = new QRCode(qrcodeDiv, {
-        text: qrData,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-    
-    statusElement.textContent = `QR Code generato per ${period} secondi`;
-    statusElement.style.color = "#27ae60";
-    
-    logEvent('info', `Nuovo QR generato con periodo ${period}s e tolleranza ${tolerance}`);
+    try {
+        // Crea nuovo QR Code
+        qrCodeInstance = new QRCode(qrcodeDiv, {
+            text: qrData,
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        
+        statusElement.textContent = `QR Code generato per ${period} secondi`;
+        statusElement.style.color = "#27ae60";
+        
+        logEvent('info', `Nuovo QR generato con periodo ${period}s e tolleranza ${tolerance}`);
+    } catch (error) {
+        statusElement.textContent = "Errore nella generazione del QR Code";
+        statusElement.style.color = "#e74c3c";
+        logEvent('error', `Errore generazione QR: ${error.message}`);
+    }
 }
 
 function exportLog() {
@@ -112,24 +118,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Genera QR Code iniziale
     generateQRCode();
 });
-
-// Simulazione di validazione QR (in produzione dovrebbe essere lato server)
-function validateQRData(data) {
-    const params = new URLSearchParams(data.split('?')[1]);
-    const timestamp = params.get('timestamp');
-    const period = parseInt(params.get('period')) || DEFAULT_PERIOD;
-    const tolerance = parseInt(params.get('tolerance')) || DEFAULT_TOLERANCE;
-    
-    const now = new Date();
-    const qrTime = new Date(timestamp);
-    const diffSeconds = (now - qrTime) / 1000;
-    
-    // Calcola la tolleranza in secondi
-    const toleranceSeconds = period * tolerance;
-    
-    if (Math.abs(diffSeconds) > period + toleranceSeconds) {
-        return false; // Scaduto
-    }
-    
-    return true; // Validato
-}
