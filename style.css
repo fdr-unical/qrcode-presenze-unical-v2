@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.config-section {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.config-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.config-section input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.qr-section {
+    padding: 30px;
+    text-align: center;
+}
+
+#qrcode {
+    margin: 20px auto;
+    display: inline-block;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#status {
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.log-section {
+    padding: 20px;
+}
+
+.log-section h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+#exportBtn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+}
+
+#exportBtn:hover {
+    background: #2980b9;
+}
+
+#logContainer {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.log-entry {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    border-left: 4px solid #3498db;
+}
+
+.log-entry.success {
+    border-left-color: #27ae60;
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.log-entry.error {
+    border-left-color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.log-entry.warning {
+    border-left-color: #f39c12;
+    background: rgba(243, 156, 18, 0.1);
+}
+
+footer {
+    background: #ecf0f1;
+    padding: 15px;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .config-section input {
+        padding: 10px;
+    }
+}
